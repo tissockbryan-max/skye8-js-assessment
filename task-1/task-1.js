@@ -18,6 +18,8 @@ const els = {
   total: document.getElementById("expense-total"),
   count: document.getElementById("expense-count"),
   empty: document.getElementById("expense-empty"),
+  nameErrorMessage: document.getElementById("expense-name-error"),
+  amountErrorMessage: document.getElementById("expense-amount-error"),
 };
 
 /** @type {{ id: string, name: string, amount: number }[]} */
@@ -28,7 +30,19 @@ let expenses = [];
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
 function validateExpense(name, amount) {
-  return { valid: false, errors: {} };
+  const errors = {};
+  if (name.value === "") {
+    nameErrorMessage.textContent = "Name is required";
+  }
+  if (amount.value === "") {
+    amountErrorMessage.textContent = "Amount is required";
+  } else if (isNaN(amount.value)) {
+    amountErrorMessage.textContent = "Amount must be a number";
+  } else if (amount.value <= 0) {
+    amountErrorMessage.textContent = "Amount must be a positive number";
+  } else {
+    return { valid: true, errors: {} };
+  }
 }
 
 // TODO [T1-02]: Add a validated expense to state and re-render.
