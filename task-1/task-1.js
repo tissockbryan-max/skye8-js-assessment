@@ -51,7 +51,13 @@ function validateExpense(name, amount) {
 }
 
 // TODO [T1-02]: Add a validated expense to state and re-render.
-function addExpense(name, amount) {}
+function addExpense(name, amount) {
+  expenses.push({
+    id: 1,
+    name: name.value,
+    amount: amount.value,
+  });
+}
 
 // TODO [T1-03]: Remove one expense by id and re-render.
 function removeExpense(id) {}
