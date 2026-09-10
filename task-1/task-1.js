@@ -33,16 +33,20 @@ function validateExpense(name, amount) {
   if (name.value === "") {
     els.nameErrorMessage.textContent = "Name is required";
     els.nameErrorMessage.style.color = "red";
+    valid = false;
   }
   if (amount.value === "") {
     els.amountErrorMessage.textContent = "Amount is required";
     els.amountErrorMessage.style.color = "red";
+    valid = false;
   } else if (isNaN(amount.value)) {
     els.amountErrorMessage.textContent = "Amount must be a number";
     els.amountErrorMessage.style.color = "red";
+    valid = false;
   } else if (amount.value <= 0) {
     els.amountErrorMessage.textContent = "Amount must be a positive number";
     els.amountErrorMessage.style.color = "red";
+    valid = false;
   } else {
     els.nameErrorMessage.textContent = "";
     els.amountErrorMessage.textContent = "";
