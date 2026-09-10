@@ -30,6 +30,11 @@ let expenses = [];
 // Reject an empty name, an empty amount, a non-numeric amount and any
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
+
+submitBtn.addEventListener("click", (event) => {
+  validateExpense(name, amount);
+});
+
 function validateExpense(name, amount) {
   let valid = true;
   if (name.value === "") {
