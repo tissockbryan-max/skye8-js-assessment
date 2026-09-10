@@ -30,6 +30,7 @@ let expenses = [];
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
 function validateExpense(name, amount) {
+  let valid = true;
   if (name.value === "") {
     els.nameErrorMessage.textContent = "Name is required";
     els.nameErrorMessage.style.color = "red";
@@ -74,9 +75,7 @@ function removeExpense(id) {
 }
 
 // TODO [T1-04]: Sum the amounts. Must be derived, never stored.
-function calculateTotal(expenses) {
-  return sum;
-}
+function calculateTotal() {}
 
 // TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
 // concatenation of unescaped user input.
