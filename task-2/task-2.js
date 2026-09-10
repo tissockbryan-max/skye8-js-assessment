@@ -37,14 +37,22 @@ function getGrade(score) {
   } else if (score >= 50 && score <= 59) {
     return "D";
   }
-  return "Fz";
+  return "F";
 }
 
 // TODO [T2-02]: Validate the submitted name and score.
 // Reject an empty name, a non-numeric score, a score below 0 and a
 // score above 100.
 function validateStudent(name, score) {
-  return { valid: false, errors: {} };
+  if (name.value === "") {
+    return { valid: false, errors: { name: "Name is required" } };
+  } else if (score.value === "") {
+    return { valid: false, errors: { score: "Score is required" } };
+  } else if (isNaN(score.value)) {
+    return { valid: false, errors: { score: "Score must be a number" } };
+  } else if (score.value < 0 || score.value > 100) {
+    return { valid: false, errors: { score: "Score must be between 0 and 100" } };
+  }
 }
 
 // TODO [T2-03]: Add a validated student to state and re-render.
