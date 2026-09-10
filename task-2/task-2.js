@@ -28,7 +28,16 @@ let students = [];
 // TODO [T2-01]: Derive a letter grade from a numeric score.
 // A: 80-100, B: 70-79, C: 60-69, D: 50-59, F: below 50.
 function getGrade(score) {
-  return "";
+  if (score >= 80 && score <= 100) {
+    return "A";
+  } else if (score >= 70 && score <= 79) {
+    return "B";
+  } else if (score >= 60 && score <= 69) {
+    return "C";
+  } else if (score >= 50 && score <= 59) {
+    return "D";
+  }
+  return "Fz";
 }
 
 // TODO [T2-02]: Validate the submitted name and score.
