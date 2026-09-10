@@ -50,6 +50,11 @@ function validateExpense(name, amount) {
   }
 }
 
+// Generates a unique id for each expense.
+function generateId() {
+  return Math.floor(Math.random() * 50) + 1;
+}
+
 // TODO [T1-02]: Add a validated expense to state and re-render.
 function addExpense(name, amount) {
   expenses.push({
