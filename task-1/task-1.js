@@ -20,6 +20,7 @@ const els = {
   empty: document.getElementById("expense-empty"),
   nameErrorMessage: document.getElementById("expense-name-error"),
   amountErrorMessage: document.getElementById("expense-amount-error"),
+  submitBtn: document.getElementById("btn"),
 };
 
 /** @type {{ id: string, name: string, amount: number }[]} */
@@ -55,9 +56,8 @@ function validateExpense(name, amount) {
   }
 }
 
-// Generates a unique id for each expense.
 function generateId() {
-  return expenses.length + 1;
+  return Date().toString();
 }
 
 // TODO [T1-02]: Add a validated expense to state and re-render.
