@@ -30,17 +30,22 @@ let expenses = [];
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
 function validateExpense(name, amount) {
-  const errors = {};
   if (name.value === "") {
     nameErrorMessage.textContent = "Name is required";
+    nameErrorMessage.style.color = "red";
   }
   if (amount.value === "") {
     amountErrorMessage.textContent = "Amount is required";
+    amountErrorMessage.style.color = "red";
   } else if (isNaN(amount.value)) {
     amountErrorMessage.textContent = "Amount must be a number";
+    amountErrorMessage.style.color = "red";
   } else if (amount.value <= 0) {
     amountErrorMessage.textContent = "Amount must be a positive number";
+    amountErrorMessage.style.color = "red";
   } else {
+    nameErrorMessage.textContent = "";
+    amountErrorMessage.textContent = "";
     return { valid: true, errors: {} };
   }
 }
