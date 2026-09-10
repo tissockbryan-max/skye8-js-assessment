@@ -31,21 +31,21 @@ let expenses = [];
 // use to populate the field-error elements.
 function validateExpense(name, amount) {
   if (name.value === "") {
-    nameErrorMessage.textContent = "Name is required";
-    nameErrorMessage.style.color = "red";
+    els.nameErrorMessage.textContent = "Name is required";
+    els.nameErrorMessage.style.color = "red";
   }
   if (amount.value === "") {
-    amountErrorMessage.textContent = "Amount is required";
-    amountErrorMessage.style.color = "red";
+    els.amountErrorMessage.textContent = "Amount is required";
+    els.amountErrorMessage.style.color = "red";
   } else if (isNaN(amount.value)) {
-    amountErrorMessage.textContent = "Amount must be a number";
-    amountErrorMessage.style.color = "red";
+    els.amountErrorMessage.textContent = "Amount must be a number";
+    els.amountErrorMessage.style.color = "red";
   } else if (amount.value <= 0) {
-    amountErrorMessage.textContent = "Amount must be a positive number";
-    amountErrorMessage.style.color = "red";
+    els.amountErrorMessage.textContent = "Amount must be a positive number";
+    els.amountErrorMessage.style.color = "red";
   } else {
-    nameErrorMessage.textContent = "";
-    amountErrorMessage.textContent = "";
+    els.nameErrorMessage.textContent = "";
+    els.amountErrorMessage.textContent = "";
     return { valid: true, errors: {} };
   }
 }
@@ -65,11 +65,13 @@ function addExpense(name, amount) {
 }
 
 // TODO [T1-03]: Remove one expense by id and re-render.
-function removeExpense(id) {}
+function removeExpense(id) {
+  expenses = expenses.filter((expense) => expense.id !== id);
+}
 
 // TODO [T1-04]: Sum the amounts. Must be derived, never stored.
-function calculateTotal() {
-  return 0;
+function calculateTotal(expenses) {
+  return sum;
 }
 
 // TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
