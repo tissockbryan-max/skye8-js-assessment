@@ -31,11 +31,7 @@ let expenses = [];
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
 
-submitBtn.addEventListener("click", (event) => {
-  validateExpense(name, amount);
-});
-
-function validateExpense(name, amount) {
+submitBtn.addEventListener("click", function validateExpense(name, amount) {
   let valid = true;
   if (name.value === "") {
     els.nameErrorMessage.textContent = "Name is required";
@@ -59,7 +55,7 @@ function validateExpense(name, amount) {
     els.amountErrorMessage.textContent = "";
     return { valid: true, errors: {} };
   }
-}
+});
 
 function generateId() {
   return Date().toString();
@@ -72,26 +68,58 @@ function addExpense(name, amount) {
     name: name.value,
     amount: Number(amount.value),
   });
+
+  renderExpenses();
+  renderSummary();
 }
 
 // TODO [T1-03]: Remove one expense by id and re-render.
 function removeExpense(id) {
   expenses = expenses.filter((expense) => expense.id !== id);
+  renderExpenses();
+  renderSummary();
 }
 
 // TODO [T1-04]: Sum the amounts. Must be derived, never stored.
-function calculateTotal() {}
+function calculateTotal() {
+  return expenses.reduce((sum, expense) => sum + expense["amount"], 0);
+}
 
 // TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
 // concatenation of unescaped user input.
-function renderExpenses() {}
+function renderExpenses() {
+  els.list.innerHTML = "";
+  while (expenses.length > 0) {
+    let anExpense = document.createElement("li");
+    anExpense.className = "expense-list-item";
+    let expenseName = document.createElement("p");
+    expenseName.textContent = expenses.name;
+    let expenseAmount = document.createElement("p");
+    expenseAmount.textContent = expenses.amount.toFixed(1) + "FCFA";
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "remove";
+    deleteBtn.className = "remove-expense-btn";
+    deleteBtn.dataset.id = expenses.id;
+
+    anExpense.appendChild(expenseName);
+    anExpense.appendChild(expenseAmount);
+    anExpense.appendChild(deleteBtn);
+    els.list.appendChild(anExpense);
+  }
+}
 
 // TODO [T1-06]: Toggle the empty state and refresh the total and count.
-function renderSummary() {}
+function renderSummary() {
+  els.total.textContent = calculateTotal(expenses).toFixed(1) + "FCFA";
+  els.count.textContent = expenses.length;
+}
 
 function init() {
   // TODO [T1-07]: Bind the form submit and the delete delegation, then
   // perform the first render.
+
+  renderExpenses();
+  renderSummary();
 }
 
 document.addEventListener("DOMContentLoaded", init);
