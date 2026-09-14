@@ -276,7 +276,7 @@ walk through your task 5 aggregation logic live.
 
 ## Live application
 
-`<https://js-assessment-ranjoy.netlify.app/`
+`https://js-assessment-ranjoy.netlify.app/`
 
 ---
 
