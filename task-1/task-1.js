@@ -31,27 +31,28 @@ let expenses = [];
 // use to populate the field-error elements.
 
 function validateExpense(name, amount) {
+  els.nameErrorMessage.textContent = "";
+  els.amountErrorMessage.textContent = "";
+
   let valid = true;
-  if (name.value === "") {
+  if (name === "") {
     els.nameErrorMessage.textContent = "Name is required";
     els.nameErrorMessage.style.color = "red";
     valid = false;
   }
-  if (amount.value === "") {
+  if (amount === "") {
     els.amountErrorMessage.textContent = "Amount is required";
     els.amountErrorMessage.style.color = "red";
     valid = false;
-  } else if (isNaN(amount.value)) {
+  } else if (isNaN(amount)) {
     els.amountErrorMessage.textContent = "Amount must be a number";
     els.amountErrorMessage.style.color = "red";
     valid = false;
-  } else if (amount.value <= 0) {
+  } else if (amount <= 0) {
     els.amountErrorMessage.textContent = "Amount must be a positive number";
     els.amountErrorMessage.style.color = "red";
     valid = false;
   } else {
-    els.nameErrorMessage.textContent = "";
-    els.amountErrorMessage.textContent = "";
     return { valid: true, errors: {} };
   }
 }
