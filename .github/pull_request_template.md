@@ -16,15 +16,13 @@ Delete nothing except these comment blocks.
 
 ## Hosted application
 
-Live URL:
-
-<!-- Paste the URL you have actually opened and tested. Not a guess. -->
+Live URL: https://js-assessment-ranjoy.netlify.app/
 
 Hosting platform: Netlify
 
 ## Repository
 
-Fork URL:
+Fork URL: https://github.com/tissockbryan-max/skye8-js-assessment
 
 ## Completed tasks
 
