@@ -88,13 +88,13 @@ function calculateTotal() {
 // concatenation of unescaped user input.
 function renderExpenses() {
   els.list.innerHTML = "";
-  while (expenses.length > 0) {
+  expenses.forEach(() => {
     let anExpense = document.createElement("li");
     anExpense.className = "expense-list-item";
     let expenseName = document.createElement("p");
     expenseName.textContent = expenses.name;
     let expenseAmount = document.createElement("p");
-    expenseAmount.textContent = expenses.amount.toFixed(1) + "FCFA";
+    expenseAmount.textContent = expenses.amount;
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "remove";
     deleteBtn.className = "remove-expense-btn";
@@ -104,7 +104,7 @@ function renderExpenses() {
     anExpense.appendChild(expenseAmount);
     anExpense.appendChild(deleteBtn);
     els.list.appendChild(anExpense);
-  }
+  });
 }
 
 // TODO [T1-06]: Toggle the empty state and refresh the total and count.
@@ -129,7 +129,7 @@ function init() {
     els.amount.value = "";
   });
 
-  els.anExpense.addEventListener("click", function (event) {
+  els.list.addEventListener("click", function (event) {
     if (event.target === expenses.id) {
       removeExpense(event.target.dataset.id);
     }
