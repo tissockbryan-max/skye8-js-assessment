@@ -33,8 +33,8 @@ let expenses = [];
 function validateExpense(name, amount) {
   els.nameErrorMessage.textContent = "";
   els.amountErrorMessage.textContent = "";
-
   let valid = true;
+
   if (name === "") {
     els.nameErrorMessage.textContent = "Name is required";
     els.nameErrorMessage.style.color = "red";
@@ -52,9 +52,8 @@ function validateExpense(name, amount) {
     els.amountErrorMessage.textContent = "Amount must be a positive number";
     els.amountErrorMessage.style.color = "red";
     valid = false;
-  } else {
-    return { valid: true, errors: {} };
   }
+  return { valid: true };
 }
 
 function generateId() {
@@ -66,7 +65,7 @@ function addExpense(name, amount) {
   expenses.push({
     id: generateId(),
     name: name.value,
-    amount: Number(amount.value),
+    amount: Number(amount),
   });
 
   renderExpenses();
@@ -122,7 +121,7 @@ function init() {
     const name = els.name.value.trim();
     const amount = els.amount.value.trim();
     const result = validateExpense(name, amount);
-    if (!result.valid) {
+    if (result.valid == false) {
       return;
     }
     addExpense(name, amount);
