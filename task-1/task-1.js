@@ -25,10 +25,7 @@ const els = {
 /** @type {{ id: string, name: string, amount: number }[]} */
 let expenses = [];
 
-// TODO [T1-01]: Validate the submitted name and amount.
-// Reject an empty name, an empty amount, a non-numeric amount and any
-// amount that is zero or negative. Return a result object the caller can
-// use to populate the field-error elements.
+// [T1-01]
 
 function validateExpense(name, amount) {
   els.nameErrorMessage.textContent = "";
@@ -60,7 +57,7 @@ function generateId() {
   return Date().toString();
 }
 
-// TODO [T1-02]: Add a validated expense to state and re-render.
+// [T1-02]
 function addExpense(name, amount) {
   expenses.push({
     id: generateId(),
@@ -72,20 +69,19 @@ function addExpense(name, amount) {
   renderSummary();
 }
 
-// TODO [T1-03]: Remove one expense by id and re-render.
+// [T1-03]
 function removeExpense(id) {
   expenses = expenses.filter((expense) => expense.id !== id);
   renderExpenses();
   renderSummary();
 }
 
-// TODO [T1-04]: Sum the amounts. Must be derived, never stored.
+// [T1-04]
 function calculateTotal() {
   return expenses.reduce((sum, expense) => sum + expense["amount"], 0);
 }
 
-// TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
-// concatenation of unescaped user input.
+// [T1-05]
 function renderExpenses() {
   els.list.innerHTML = "";
   expenses.forEach((expense) => {
@@ -115,15 +111,14 @@ function renderExpenses() {
   }
 }
 
-// TODO [T1-06]: Toggle the empty state and refresh the total and count.
+// [T1-06]
 function renderSummary() {
   els.total.textContent = calculateTotal(expenses).toFixed(1) + " FCFA";
   els.count.textContent = expenses.length;
 }
 
+// [T1-07]
 function init() {
-  // TODO [T1-07]: Bind the form submit and the delete delegation, then
-  // perform the first render.
   els.form.addEventListener("submit", function (event) {
     event.preventDefault();
     const name = els.name.value.trim();
