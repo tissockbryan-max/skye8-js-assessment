@@ -88,17 +88,17 @@ function calculateTotal() {
 // concatenation of unescaped user input.
 function renderExpenses() {
   els.list.innerHTML = "";
-  expenses.forEach(() => {
+  expenses.forEach((expense) => {
     let anExpense = document.createElement("li");
     anExpense.className = "expense-list-item";
     let expenseName = document.createElement("p");
-    expenseName.textContent = expenses.name;
+    expenseName.textContent = expense.name;
     let expenseAmount = document.createElement("p");
-    expenseAmount.textContent = expenses.amount;
+    expenseAmount.textContent = expense.amount;
     let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "remove";
+    deleteBtn.textContent = "⨉";
     deleteBtn.className = "remove-expense-btn";
-    deleteBtn.dataset.id = expenses.id;
+    deleteBtn.dataset.id = expense.id;
 
     anExpense.appendChild(expenseName);
     anExpense.appendChild(expenseAmount);
@@ -109,7 +109,7 @@ function renderExpenses() {
 
 // TODO [T1-06]: Toggle the empty state and refresh the total and count.
 function renderSummary() {
-  els.total.textContent = calculateTotal(expenses).toFixed(1) + "FCFA";
+  els.total.textContent = calculateTotal(expenses).toFixed(1) + " FCFA";
   els.count.textContent = expenses.length;
 }
 
@@ -130,7 +130,7 @@ function init() {
   });
 
   els.list.addEventListener("click", function (event) {
-    if (event.target === expenses.id) {
+    if (event.target.tagName === "BUTTON") {
       removeExpense(event.target.dataset.id);
     }
   });
