@@ -33,7 +33,7 @@ let expenses = [];
 function validateExpense(name, amount) {
   els.nameErrorMessage.textContent = "";
   els.amountErrorMessage.textContent = "";
-  let valid = true;
+  let valid;
 
   if (name === "") {
     els.nameErrorMessage.textContent = "Name is required";
@@ -97,6 +97,7 @@ function renderExpenses() {
     expenseAmount.textContent = expense.amount;
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "⨉";
+    deleteBtn.style.marginLeft = "2rem";
     deleteBtn.className = "remove-expense-btn";
     deleteBtn.dataset.id = expense.id;
 
@@ -105,6 +106,12 @@ function renderExpenses() {
     anExpense.appendChild(deleteBtn);
     els.list.appendChild(anExpense);
   });
+
+  if (expenses.length == 0) {
+    els.empty.style.display = "flex";
+  } else {
+    els.empty.style.display = "none";
+  }
 }
 
 // TODO [T1-06]: Toggle the empty state and refresh the total and count.
