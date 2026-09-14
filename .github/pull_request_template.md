@@ -129,8 +129,6 @@ I tried to debug it but had no solution.
 
 ## Notes for the reviewer
 
----
-
 ### Author confirmation
 
 - [ ✔ ] I have opened the hosted URL above and used all five applications on it
