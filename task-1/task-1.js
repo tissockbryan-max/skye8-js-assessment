@@ -64,7 +64,7 @@ function generateId() {
 function addExpense(name, amount) {
   expenses.push({
     id: generateId(),
-    name: name.value,
+    name,
     amount: Number(amount),
   });
 
@@ -91,9 +91,9 @@ function renderExpenses() {
   expenses.forEach((expense) => {
     let anExpense = document.createElement("li");
     anExpense.className = "expense-list-item";
-    let expenseName = document.createElement("p");
+    let expenseName = document.createElement("span");
     expenseName.textContent = expense.name;
-    let expenseAmount = document.createElement("p");
+    let expenseAmount = document.createElement("span");
     expenseAmount.textContent = expense.amount;
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "⨉";
