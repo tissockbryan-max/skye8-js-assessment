@@ -82,7 +82,7 @@ function removeExpense(id) {
 
 // TODO [T1-04]: Sum the amounts. Must be derived, never stored.
 function calculateTotal() {
-  return expenses.reduce((sum, expense) => sum + expense["amount"], 0);
+  return expenses.reduce((sum, expense) => sum + expenses["amount"], 0);
 }
 
 // TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
@@ -117,6 +117,24 @@ function renderSummary() {
 function init() {
   // TODO [T1-07]: Bind the form submit and the delete delegation, then
   // perform the first render.
+  els.form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const name = els.name.value.trim();
+    const amount = els.amount.value.trim();
+    const result = validateExpense(name, amount);
+    if (!result.valid) {
+      return;
+    }
+    addExpense(name, amount);
+    els.name.value = "";
+    els.amount.value = "";
+  });
+
+  els.anExpense.addEventListener("click", function (event) {
+    if (event.target === expenses.id) {
+      removeExpense(event.target.dataset.id);
+    }
+  });
 
   renderExpenses();
   renderSummary();
