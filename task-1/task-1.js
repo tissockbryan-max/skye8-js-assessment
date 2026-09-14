@@ -95,6 +95,7 @@ function renderExpenses() {
     expenseName.textContent = expense.name;
     let expenseAmount = document.createElement("span");
     expenseAmount.textContent = expense.amount;
+    expenseAmount.style.marginLeft = "2rem";
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "⨉";
     deleteBtn.style.marginLeft = "2rem";
