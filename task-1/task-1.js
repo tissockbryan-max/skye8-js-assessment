@@ -20,7 +20,6 @@ const els = {
   empty: document.getElementById("expense-empty"),
   nameErrorMessage: document.getElementById("expense-name-error"),
   amountErrorMessage: document.getElementById("expense-amount-error"),
-  submitBtn: document.getElementById("btn"),
 };
 
 /** @type {{ id: string, name: string, amount: number }[]} */
@@ -31,7 +30,7 @@ let expenses = [];
 // amount that is zero or negative. Return a result object the caller can
 // use to populate the field-error elements.
 
-submitBtn.addEventListener("click", function validateExpense(name, amount) {
+function validateExpense(name, amount) {
   let valid = true;
   if (name.value === "") {
     els.nameErrorMessage.textContent = "Name is required";
@@ -55,7 +54,7 @@ submitBtn.addEventListener("click", function validateExpense(name, amount) {
     els.amountErrorMessage.textContent = "";
     return { valid: true, errors: {} };
   }
-});
+}
 
 function generateId() {
   return Date().toString();
@@ -82,7 +81,7 @@ function removeExpense(id) {
 
 // TODO [T1-04]: Sum the amounts. Must be derived, never stored.
 function calculateTotal() {
-  return expenses.reduce((sum, expense) => sum + expenses["amount"], 0);
+  return expenses.reduce((sum, expense) => sum + expense["amount"], 0);
 }
 
 // TODO [T1-05]: Build the list from state. Clear it first. No innerHTML
