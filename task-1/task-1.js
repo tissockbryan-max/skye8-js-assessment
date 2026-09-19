@@ -32,43 +32,30 @@ function validateExpense(name, amount) {
   els.amountErrorMessage.textContent = "";
   let valid;
 
-  if (
-    name.value !== "" &&
-    !isNaN(name.value) &&
-    amount.value !== "" &&
-    isNaN(amount.value) &&
-    amount.value <= 0
-  ) {
-    valid = true;
-  } else {
+  if (name === "") {
+    els.nameErrorMessage.textContent = "Name is required";
+    els.nameErrorMessage.style.color = "red";
     valid = false;
+  } else if (isNaN(name)) {
+    els.nameErrorMessage.textContent = "Name should not be a number";
+    els.nameErrorMessage.style.color = "red";
+    valid = false;
+  } else if (amount === "") {
+    els.amountErrorMessage.textContent = "Amount is required";
+    els.amountErrorMessage.style.color = "red";
+    valid = false;
+  } else if (isNaN(amount)) {
+    els.amountErrorMessage.textContent = "Amount must be a number";
+    els.amountErrorMessage.style.color = "red";
+    valid = false;
+  } else if (amount <= 0) {
+    els.amountErrorMessage.textContent = "Amount must be a positive number";
+    els.amountErrorMessage.style.color = "red";
+    valid = false;
+  } else {
+    valid = true;
   }
-
   return valid;
-
-  // if (name === "") {
-  //   els.nameErrorMessage.textContent = "Name is required";
-  //   els.nameErrorMessage.style.color = "red";
-  //   valid = false;
-  // } else if (isNaN(name)) {
-  //   els.nameErrorMessage.textContent = "Name should not be a number";
-  //   els.nameErrorMessage.style.color = "red";
-  //   valid = false;
-  // } else if (amount === "") {
-  //   els.amountErrorMessage.textContent = "Amount is required";
-  //   els.amountErrorMessage.style.color = "red";
-  //   valid = false;
-  // } else if (isNaN(amount)) {
-  //   els.amountErrorMessage.textContent = "Amount must be a number";
-  //   els.amountErrorMessage.style.color = "red";
-  //   valid = false;
-  // } else if (amount <= 0) {
-  //   els.amountErrorMessage.textContent = "Amount must be a positive number";
-  //   els.amountErrorMessage.style.color = "red";
-  //   valid = false;
-  // } else {
-  //   return { valid: true };
-  // }
 }
 
 function generateId() {
