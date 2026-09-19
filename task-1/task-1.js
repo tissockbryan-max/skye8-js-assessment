@@ -32,25 +32,43 @@ function validateExpense(name, amount) {
   els.amountErrorMessage.textContent = "";
   let valid;
 
-  if (name === "") {
-    els.nameErrorMessage.textContent = "Name is required";
-    els.nameErrorMessage.style.color = "red";
+  if (
+    name.value !== "" &&
+    !isNaN(name.value) &&
+    amount.value !== "" &&
+    isNaN(amount.value) &&
+    amount.value <= 0
+  ) {
+    valid = true;
+  } else {
     valid = false;
   }
-  if (amount === "") {
-    els.amountErrorMessage.textContent = "Amount is required";
-    els.amountErrorMessage.style.color = "red";
-    valid = false;
-  } else if (isNaN(amount)) {
-    els.amountErrorMessage.textContent = "Amount must be a number";
-    els.amountErrorMessage.style.color = "red";
-    valid = false;
-  } else if (amount <= 0) {
-    els.amountErrorMessage.textContent = "Amount must be a positive number";
-    els.amountErrorMessage.style.color = "red";
-    valid = false;
-  }
-  return { valid: true };
+
+  return valid;
+
+  // if (name === "") {
+  //   els.nameErrorMessage.textContent = "Name is required";
+  //   els.nameErrorMessage.style.color = "red";
+  //   valid = false;
+  // } else if (isNaN(name)) {
+  //   els.nameErrorMessage.textContent = "Name should not be a number";
+  //   els.nameErrorMessage.style.color = "red";
+  //   valid = false;
+  // } else if (amount === "") {
+  //   els.amountErrorMessage.textContent = "Amount is required";
+  //   els.amountErrorMessage.style.color = "red";
+  //   valid = false;
+  // } else if (isNaN(amount)) {
+  //   els.amountErrorMessage.textContent = "Amount must be a number";
+  //   els.amountErrorMessage.style.color = "red";
+  //   valid = false;
+  // } else if (amount <= 0) {
+  //   els.amountErrorMessage.textContent = "Amount must be a positive number";
+  //   els.amountErrorMessage.style.color = "red";
+  //   valid = false;
+  // } else {
+  //   return { valid: true };
+  // }
 }
 
 function generateId() {
@@ -124,12 +142,16 @@ function init() {
     const name = els.name.value.trim();
     const amount = els.amount.value.trim();
     const result = validateExpense(name, amount);
-    if (result.valid == false) {
-      return;
+
+    if (result.valid === false) {
+      els.name.value = "";
+      els.amount.value = "";
+    } else {
+      addExpense(name, amount);
+
+      els.name.value = "";
+      els.amount.value = "";
     }
-    addExpense(name, amount);
-    els.name.value = "";
-    els.amount.value = "";
   });
 
   els.list.addEventListener("click", function (event) {
