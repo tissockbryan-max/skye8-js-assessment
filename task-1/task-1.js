@@ -36,7 +36,7 @@ function validateExpense(name, amount) {
     els.nameErrorMessage.textContent = "Name is required";
     els.nameErrorMessage.style.color = "red";
     valid = false;
-  } else if (isNaN(name)) {
+  } else if (!isNaN(name)) {
     els.nameErrorMessage.textContent = "Name should not be a number";
     els.nameErrorMessage.style.color = "red";
     valid = false;
@@ -48,7 +48,7 @@ function validateExpense(name, amount) {
     els.amountErrorMessage.textContent = "Amount must be a number";
     els.amountErrorMessage.style.color = "red";
     valid = false;
-  } else if (amount <= 0) {
+  } else if (Number(amount) <= 0) {
     els.amountErrorMessage.textContent = "Amount must be a positive number";
     els.amountErrorMessage.style.color = "red";
     valid = false;
@@ -130,14 +130,12 @@ function init() {
     const amount = els.amount.value.trim();
     const result = validateExpense(name, amount);
 
-    if (result.valid === false) {
+    if (!result) {
       els.name.value = "";
       els.amount.value = "";
+      return;
     } else {
       addExpense(name, amount);
-
-      els.name.value = "";
-      els.amount.value = "";
     }
   });
 
