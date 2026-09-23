@@ -36,8 +36,9 @@ function getGrade(score) {
     return "C";
   } else if (score >= 50 && score <= 59) {
     return "D";
+  } else {
+    return "F";
   }
-  return "F";
 }
 
 // TODO [T2-02]: Validate the submitted name and score.
@@ -56,20 +57,37 @@ function validateStudent(name, score) {
 }
 
 // TODO [T2-03]: Add a validated student to state and re-render.
-function addStudent(name, score) {}
+function addStudent(name, score) {
+  students.push({ name, score: Number(score) });
+
+  renderStats();
+  renderStudents();
+}
 
 // TODO [T2-04]: Remove one student by id and re-render.
-function removeStudent(id) {}
+function removeStudent(id) {
+  renderStats();
+  renderStudents();
+}
 
 // TODO [T2-05]: Calculate class statistics from the students array.
 // Return average (one decimal), highest, lowest and count. With zero
 // students every stat must be a dash, never NaN.
 function calculateStats() {
   return { average: "-", highest: "-", lowest: "-", count: 0 };
+
+  renderStats();
+  renderStudents();
 }
 
 // TODO [T2-06]: Build the student list from state. Clear it first.
-function renderStudents() {}
+function renderStudents() {
+  if (students.length == 0) {
+    els.empty.style.display = "none";
+  } else {
+    els.empty.style.display = "flex";
+  }
+}
 
 // TODO [T2-07]: Update the statistics display and toggle the empty state.
 function renderStats() {}
@@ -77,6 +95,9 @@ function renderStats() {}
 function init() {
   // TODO [T2-08]: Bind the form submit and the delete delegation, then
   // perform the first render.
+
+  renderStats();
+  renderStudents();
 }
 
 document.addEventListener("DOMContentLoaded", init);
