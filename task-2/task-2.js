@@ -20,6 +20,8 @@ const els = {
   lowest: document.getElementById("stat-lowest"),
   count: document.getElementById("stat-count"),
   empty: document.getElementById("student-empty"),
+  nameErrorMessage: document.getElementById("student-name-error"),
+  scoreErrorMessage: document.getElementById("student-name-error"),
 };
 
 /** @type {{ id: string, name: string, score: number, grade: string }[]} */
@@ -45,20 +47,43 @@ function getGrade(score) {
 // Reject an empty name, a non-numeric score, a score below 0 and a
 // score above 100.
 function validateStudent(name, score) {
+  els.nameErrorMessage.textContent = "";
+  els.scoreErrorMessage.textContent = "";
+  let valid = true;
+
   if (name.value === "") {
-    return { valid: false, errors: { name: "Name is required" } };
+    els.nameErrorMessage.textContent = "Name is required";
+    valid = false;
+
+    // return { valid: false, errors: { name: "Name is required" } };
   } else if (score.value === "") {
-    return { valid: false, errors: { score: "Score is required" } };
+    els.scoreErrorMessage.textContent = "Score is required";
+    valid = false;
+
+    // return { valid: false, errors: { score: "Score is required" } };
   } else if (isNaN(score.value)) {
-    return { valid: false, errors: { score: "Score must be a number" } };
+    els.scoreErrorMessage.textContent = "Score must be a number";
+    valid = false;
+
+    // return { valid: false, errors: { score: "Score must be a number" } };
   } else if (score.value < 0 || score.value > 100) {
-    return { valid: false, errors: { score: "Score must be between 0 and 100" } };
+    els.scoreErrorMessage.textContent = "Score must be between 0 and 100";
+    valid = false;
+
+    // return { valid: false, errors: { score: "Score must be between 0 and 100" } };
+  } else {
+    valid = true;
   }
+  return valid;
 }
 
 // TODO [T2-03]: Add a validated student to state and re-render.
 function addStudent(name, score) {
-  students.push({ name, score: Number(score) });
+  students.push({
+    name,
+    score: Number(score),
+    grade: getGrade(score),
+  });
 
   renderStats();
   renderStudents();
