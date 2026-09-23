@@ -21,7 +21,7 @@ const els = {
   count: document.getElementById("stat-count"),
   empty: document.getElementById("student-empty"),
   nameErrorMessage: document.getElementById("student-name-error"),
-  scoreErrorMessage: document.getElementById("student-name-error"),
+  scoreErrorMessage: document.getElementById("student-score-error"),
 };
 
 /** @type {{ id: string, name: string, score: number, grade: string }[]} */
@@ -54,23 +54,18 @@ function validateStudent(name, score) {
   if (name.value === "") {
     els.nameErrorMessage.textContent = "Name is required";
     valid = false;
-
-    // return { valid: false, errors: { name: "Name is required" } };
+  } else if (!isNaN(name.value)) {
+    els.nameErrorMessage.textContent = "Name must be text";
+    valid = false;
   } else if (score.value === "") {
     els.scoreErrorMessage.textContent = "Score is required";
     valid = false;
-
-    // return { valid: false, errors: { score: "Score is required" } };
   } else if (isNaN(score.value)) {
     els.scoreErrorMessage.textContent = "Score must be a number";
     valid = false;
-
-    // return { valid: false, errors: { score: "Score must be a number" } };
-  } else if (score.value < 0 || score.value > 100) {
+  } else if (Number(score.value) < 0 || Number(score.value) > 100) {
     els.scoreErrorMessage.textContent = "Score must be between 0 and 100";
     valid = false;
-
-    // return { valid: false, errors: { score: "Score must be between 0 and 100" } };
   } else {
     valid = true;
   }
@@ -108,9 +103,9 @@ function calculateStats() {
 // TODO [T2-06]: Build the student list from state. Clear it first.
 function renderStudents() {
   if (students.length == 0) {
-    els.empty.style.display = "none";
-  } else {
     els.empty.style.display = "flex";
+  } else {
+    els.empty.style.display = "none";
   }
 }
 
@@ -120,6 +115,20 @@ function renderStats() {}
 function init() {
   // TODO [T2-08]: Bind the form submit and the delete delegation, then
   // perform the first render.
+  els.form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = els.name.value.trim();
+    const score = els.score.value.trim();
+    const studentResult = validateStudent(name, score);
+
+    if (!studentResult) {
+      els.name.value = "";
+      els.score.value = "";
+      return;
+    } else {
+      addStudent(name, score);
+    }
+  });
 
   renderStats();
   renderStudents();
