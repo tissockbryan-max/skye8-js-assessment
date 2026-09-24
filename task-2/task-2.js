@@ -91,6 +91,7 @@ function addStudent(name, score) {
 
 // TODO [T2-04]: Remove one student by id and re-render.
 function removeStudent(id) {
+  students = students.filter((student) => student.id != id);
   renderStats();
   renderStudents();
 }
