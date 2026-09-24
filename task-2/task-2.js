@@ -57,7 +57,9 @@ function validateStudent(name, score) {
   } else if (!isNaN(name)) {
     els.nameErrorMessage.textContent = "Name must be text";
     valid = false;
-  } else if (score === "") {
+  }
+
+  if (score === "") {
     els.scoreErrorMessage.textContent = "Score is required";
     valid = false;
   } else if (isNaN(score)) {
@@ -66,8 +68,6 @@ function validateStudent(name, score) {
   } else if (Number(score) < 0 || Number(score) > 100) {
     els.scoreErrorMessage.textContent = "Score must be between 0 and 100";
     valid = false;
-  } else {
-    valid = true;
   }
   return valid;
 }
