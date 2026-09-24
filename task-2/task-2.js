@@ -139,11 +139,11 @@ function init() {
     const studentResult = validateStudent(name, score);
 
     if (!studentResult) {
-      els.name.value = "";
-      els.score.value = "";
       return;
     } else {
       addStudent(name, score);
+      els.name.value = "";
+      els.score.value = "";
     }
   });
 
