@@ -131,7 +131,34 @@ function calculateStats() {
 }
 
 // TODO [T2-06]: Build the student list from state. Clear it first.
-function renderStudents() {}
+function renderStudents() {
+  els.list.innerHTML = "";
+  students.forEach((student) => {
+    let studentContainer = document.createElement("li");
+    let studentName = document.createElement("h3");
+    let studentScore = document.createElement("h4");
+    let studentGrade = document.createElement("h4");
+
+    studentContainer.style.display = "flex";
+    studentContainer.style.flexDirection = "row";
+    studentContainer.style.justifyContent = "space-between";
+    studentName.textContent = student.name;
+    studentScore.textContent = student.score;
+    studentGrade.textContent = student.grade;
+
+    let removeStudent = document.createElement("button");
+    removeStudent.textContent = "remove";
+    removeStudent.className = "remove-student-btn";
+    removeStudent.dataset.id = student.id;
+
+    studentContainer.appendChild(studentName);
+    studentContainer.appendChild(studentScore);
+    studentContainer.appendChild(studentGrade);
+    studentContainer.appendChild(removeStudent);
+
+    els.list.appendChild(studentContainer);
+  });
+}
 
 // TODO [T2-07]: Update the statistics display and toggle the empty state.
 function renderStats() {
