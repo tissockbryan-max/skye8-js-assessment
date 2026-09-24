@@ -120,7 +120,7 @@ function calculateStats() {
     return Math.max(highest, student.score);
   }, 0);
 
-  let average = (total / students.length).toFixed(1);
+  const average = (total / students.length).toFixed(1);
 
   return {
     average: average,
