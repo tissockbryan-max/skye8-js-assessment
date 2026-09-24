@@ -114,7 +114,7 @@ function calculateStats() {
   }, 0);
   const smallestScore = students.reduce((smallest, student) => {
     return Math.min(smallest, student.score);
-  }, Infinity);
+  }, 1000);
 
   const highestScore = students.reduce((highest, student) => {
     return Math.max(highest, student.score);
