@@ -142,6 +142,7 @@ function renderStudents() {
     studentContainer.style.display = "flex";
     studentContainer.style.flexDirection = "row";
     studentContainer.style.justifyContent = "space-between";
+    studentContainer.style.marginBottom = "2rem";
     studentName.textContent = student.name;
     studentScore.textContent = student.score;
     studentGrade.textContent = student.grade;
@@ -190,6 +191,12 @@ function init() {
       addStudent(name, score);
       els.name.value = "";
       els.score.value = "";
+    }
+  });
+
+  els.list.addEventListener("click", function (e) {
+    if (e.target.classList.contains("remove-student-btn")) {
+      removeStudent(e.target.dataset.id);
     }
   });
 
