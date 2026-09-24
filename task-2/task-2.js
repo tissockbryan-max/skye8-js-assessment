@@ -109,8 +109,8 @@ function calculateStats() {
   //   return student.score;
   // });
 
-  const total = students.reduce((sum, score) => {
-    return sum + score;
+  const total = students.reduce((sum, student) => {
+    return sum + student.score;
   }, 0);
   const smallestScore = students.reduce((smallest, student) => {
     return Math.min(smallest, student.score);
