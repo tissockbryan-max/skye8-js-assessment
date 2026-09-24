@@ -27,8 +27,7 @@ const els = {
 /** @type {{ id: string, name: string, score: number, grade: string }[]} */
 let students = [];
 
-// TODO [T2-01]: Derive a letter grade from a numeric score.
-// A: 80-100, B: 70-79, C: 60-69, D: 50-59, F: below 50.
+// TODO [T2-01]
 function getGrade(score) {
   if (score >= 80 && score <= 100) {
     return "A";
@@ -43,9 +42,7 @@ function getGrade(score) {
   }
 }
 
-// TODO [T2-02]: Validate the submitted name and score.
-// Reject an empty name, a non-numeric score, a score below 0 and a
-// score above 100.
+// TODO [T2-02]
 function validateStudent(name, score) {
   els.nameErrorMessage.textContent = "";
   els.scoreErrorMessage.textContent = "";
@@ -76,7 +73,7 @@ function studentId() {
   return Date().toString();
 }
 
-// TODO [T2-03]: Add a validated student to state and re-render.
+// TODO [T2-03]
 function addStudent(name, score) {
   students.push({
     id: studentId(),
@@ -89,16 +86,14 @@ function addStudent(name, score) {
   renderStudents();
 }
 
-// TODO [T2-04]: Remove one student by id and re-render.
+// TODO [T2-04]
 function removeStudent(id) {
   students = students.filter((student) => student.id != id);
   renderStats();
   renderStudents();
 }
 
-// TODO [T2-05]: Calculate class statistics from the students array.
-// Return average (one decimal), highest, lowest and count. With zero
-// students every stat must be a dash, never NaN.
+// TODO [T2-05]
 function calculateStats() {
   if (students.length === 0) {
     return { average: "-", highest: "-", lowest: "-", count: 0 };
@@ -130,7 +125,7 @@ function calculateStats() {
   };
 }
 
-// TODO [T2-06]: Build the student list from state. Clear it first.
+// TODO [T2-06]
 function renderStudents() {
   els.list.innerHTML = "";
   students.forEach((student) => {
@@ -161,7 +156,7 @@ function renderStudents() {
   });
 }
 
-// TODO [T2-07]: Update the statistics display and toggle the empty state.
+// TODO [T2-07]
 function renderStats() {
   if (students.length == 0) {
     els.empty.style.display = "flex";
@@ -177,8 +172,7 @@ function renderStats() {
 }
 
 function init() {
-  // TODO [T2-08]: Bind the form submit and the delete delegation, then
-  // perform the first render.
+  // TODO [T2-08]
   els.form.addEventListener("submit", function (e) {
     e.preventDefault();
     const name = els.name.value.trim();
