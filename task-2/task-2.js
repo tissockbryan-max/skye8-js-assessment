@@ -51,19 +51,19 @@ function validateStudent(name, score) {
   els.scoreErrorMessage.textContent = "";
   let valid = true;
 
-  if (name.value === "") {
+  if (name === "") {
     els.nameErrorMessage.textContent = "Name is required";
     valid = false;
-  } else if (!isNaN(name.value)) {
+  } else if (!isNaN(name)) {
     els.nameErrorMessage.textContent = "Name must be text";
     valid = false;
-  } else if (score.value === "") {
+  } else if (score === "") {
     els.scoreErrorMessage.textContent = "Score is required";
     valid = false;
-  } else if (isNaN(score.value)) {
+  } else if (isNaN(score)) {
     els.scoreErrorMessage.textContent = "Score must be a number";
     valid = false;
-  } else if (Number(score.value) < 0 || Number(score.value) > 100) {
+  } else if (Number(score) < 0 || Number(score) > 100) {
     els.scoreErrorMessage.textContent = "Score must be between 0 and 100";
     valid = false;
   } else {
@@ -72,9 +72,14 @@ function validateStudent(name, score) {
   return valid;
 }
 
+function studentId() {
+  return Date().toString();
+}
+
 // TODO [T2-03]: Add a validated student to state and re-render.
 function addStudent(name, score) {
   students.push({
+    id: studentId(),
     name,
     score: Number(score),
     grade: getGrade(score),
@@ -95,9 +100,6 @@ function removeStudent(id) {
 // students every stat must be a dash, never NaN.
 function calculateStats() {
   return { average: "-", highest: "-", lowest: "-", count: 0 };
-
-  renderStats();
-  renderStudents();
 }
 
 // TODO [T2-06]: Build the student list from state. Clear it first.
