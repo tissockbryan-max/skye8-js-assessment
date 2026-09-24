@@ -99,20 +99,35 @@ function removeStudent(id) {
 // Return average (one decimal), highest, lowest and count. With zero
 // students every stat must be a dash, never NaN.
 function calculateStats() {
-  return { average: "-", highest: "-", lowest: "-", count: 0 };
+  const smallestScore = students.reduce((smallest, student) => {
+    return Math.min(smallest, student.score);
+  });
+
+  const highestScore = students.reduce((highest, student) => {
+    return Math.max(highest, student.score);
+  });
+
+  els.highest.textContent = highestScore;
+  els.smallest.textContent = smallestScore;
+  els.count.textContent = students.length;
+
+  // return { average: "-", highest: "-", lowest: "-", count: 0 };
+
+  renderStats();
+  renderStudents();
 }
 
 // TODO [T2-06]: Build the student list from state. Clear it first.
-function renderStudents() {
+function renderStudents() {}
+
+// TODO [T2-07]: Update the statistics display and toggle the empty state.
+function renderStats() {
   if (students.length == 0) {
     els.empty.style.display = "flex";
   } else {
     els.empty.style.display = "none";
   }
 }
-
-// TODO [T2-07]: Update the statistics display and toggle the empty state.
-function renderStats() {}
 
 function init() {
   // TODO [T2-08]: Bind the form submit and the delete delegation, then
