@@ -104,10 +104,10 @@ function calculateStats() {
     return { average: "-", highest: "-", lowest: "-", count: 0 };
   }
 
-  const scores = students.map((student) => {
-    // New list that has all the scores of the students.
-    return student.score;
-  });
+  // const scores = students.map((student) => {
+  //   // New list that has all the scores of the students.
+  //   return student.score;
+  // });
 
   const total = students.reduce((sum, score) => {
     return sum + score;
@@ -120,11 +120,14 @@ function calculateStats() {
     return Math.max(highest, student.score);
   }, 0);
 
-  els.highest.textContent = highestScore;
-  els.smallest.textContent = smallestScore;
-  els.count.textContent = students.length;
+  let average = (total / students.length).toFixed(1);
 
-  return { average, highest, lowest, count: students.length };
+  return {
+    average: average,
+    highest: highestScore,
+    lowest: smallestScore,
+    count: students.length,
+  };
 }
 
 // TODO [T2-06]: Build the student list from state. Clear it first.
@@ -137,6 +140,12 @@ function renderStats() {
   } else {
     els.empty.style.display = "none";
   }
+
+  const statistics = calculateStats();
+  els.highest.textContent = statistics.highest;
+  els.lowest.textContent = statistics.lowest;
+  els.count.textContent = statistics.count;
+  els.average.textContent = statistics.average;
 }
 
 function init() {
