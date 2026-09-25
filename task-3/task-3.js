@@ -36,10 +36,10 @@ var currentFilter = "all";
 // Parse with JSON.parse inside a try/catch. Corrupt or absent data
 // must produce an empty array, never a thrown error.
 function loadState() {
-  let savedTodo = localStorage.getItem("sky8.task3.todos");
+  let savedTodo = localStorage.getItem(STORAGE_KEY);
   try {
-    savedTodo = JSON.parse(savedTodo);
-  } catch (error) {
+    JSON.parse(savedTodo);
+  } catch {
     if (savedTodo === "") {
       return [];
     }
@@ -50,7 +50,7 @@ function loadState() {
 // TODO [T3-02]: Save the current todos array to localStorage under
 // STORAGE_KEY using JSON.stringify.
 function saveState() {
-  localStorage.setItem("sky8.task3.todos", JSON.stringify(todos));
+  return localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
 
 // TODO [T3-03]: Validate the submitted text. Reject empty strings and
@@ -69,7 +69,7 @@ function validateTodo(input) {
 }
 
 function todoId() {
-  return Date().toString();
+  return crypto.randomUUID();
 }
 
 // TODO [T3-04]: Add a new task to state, save, and re-render.
@@ -77,23 +77,39 @@ function addTodo(input) {
   todos.push({
     id: todoId(),
     input,
-    // completed,
+    // completed
     createdAt: Date().toString(),
   });
+  renderStats();
+  renderTodos();
 }
 
 // TODO [T3-05]: Toggle the completed status of a task by id, save,
 // and re-render.
-function toggleTodo(id) {}
+function toggleTodo(id) {
+  renderStats();
+  renderTodos();
+}
 
 // TODO [T3-06]: Remove a task by id, save, and re-render.
-function removeTodo(id) {}
+function removeTodo(id) {
+  todos = todos.filter((todo) => todo.id !== id);
+  renderStats();
+  renderTodos();
+}
 
 // TODO [T3-07]: Return the todos that match the current filter.
 // "all" returns everything, "pending" returns incomplete tasks,
 // "completed" returns completed tasks. Filtering must not delete data.
 function getFilteredTodos() {
-  return [];
+  let all = todos.filter((todo) => todo);
+  let completed = todos.filter((todo) => todo.completed === true);
+  let pending = todos.filter((todo) => todo.completed !== false);
+  return {
+    filterAll: all,
+    filterCompleted: completed,
+    filterPending: pending,
+  };
 }
 
 // TODO [T3-08]: Build the task list from the filtered state. Clear it
@@ -102,7 +118,12 @@ function renderTodos() {}
 
 // TODO [T3-09]: Update the counters and toggle the empty state.
 // All counters must be derived from the array, never incremented.
-function renderStats() {}
+function renderStats() {
+  let filter = getFilteredTodos();
+  els.filterAll.textContent = filter.filterAll;
+  els.filterCompleted.textContent = filter.filterCompleted;
+  els.filterPending.textContent = filter.filterPending;
+}
 
 function init() {
   // TODO [T3-10]: Load state, bind the form submit, bind filter
