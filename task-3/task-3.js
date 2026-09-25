@@ -36,7 +36,14 @@ var currentFilter = "all";
 // Parse with JSON.parse inside a try/catch. Corrupt or absent data
 // must produce an empty array, never a thrown error.
 function loadState() {
-  return [];
+  try {
+    let savedTodo = localStorage.getItem("skye-task3-todos");
+    JSON.parse(savedTodo);
+  } catch (error) {
+    if (savedTodo === "") {
+      return [];
+    }
+  }
 }
 
 // TODO [T3-02]: Save the current todos array to localStorage under
