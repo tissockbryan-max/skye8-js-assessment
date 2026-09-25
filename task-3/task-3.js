@@ -23,6 +23,7 @@ var els = {
   statCompleted: document.getElementById("stat-completed"),
   statPending: document.getElementById("stat-pending"),
   empty: document.getElementById("todo-empty"),
+  inputErrorMessage: document.getElementById("todo-input-error"),
 };
 
 /** @type {{ id: string, text: string, completed: boolean, createdAt: string }[]} */
@@ -44,8 +45,17 @@ function saveState() {}
 
 // TODO [T3-03]: Validate the submitted text. Reject empty strings and
 // whitespace-only strings.
-function validateTodo(text) {
-  return { valid: false, error: "" };
+function validateTodo(input) {
+  els.inputErrorMessage.textContent = "";
+  let valid = true;
+  if (input === "") {
+    els.inputErrorMessage.textContent = "Description is required";
+    valid = false;
+  } else if (!isNaN(input)) {
+    els.inputErrorMessage.textContent = "Description shouldn't be a number";
+    valid = false;
+  }
+  return valid;
 }
 
 // TODO [T3-04]: Add a new task to state, save, and re-render.
@@ -77,6 +87,21 @@ function init() {
   // TODO [T3-10]: Load state, bind the form submit, bind filter
   // buttons, bind toggle and delete delegation, then perform the
   // first render.
+  els.form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const todoInput = els.input.value.trim();
+    const todo = validateTodo(todoInput);
+    if (!todo) {
+      // console.log("done!");
+      return;
+    } else {
+      addTodo(todoInput);
+      els.input.value = "";
+      // console.log("executed");
+    }
+  });
+  renderTodos();
+  renderStats();
 }
 
 document.addEventListener("DOMContentLoaded", init);
