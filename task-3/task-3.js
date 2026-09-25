@@ -36,14 +36,15 @@ var currentFilter = "all";
 // Parse with JSON.parse inside a try/catch. Corrupt or absent data
 // must produce an empty array, never a thrown error.
 function loadState() {
+  let savedTodo = localStorage.getItem("sky8.task3.todos");
   try {
-    let savedTodo = localStorage.getItem("skye-task3-todos");
-    JSON.parse(savedTodo);
+    savedTodo = JSON.parse(savedTodo);
   } catch (error) {
     if (savedTodo === "") {
       return [];
     }
   }
+  console.log(savedTodo);
 }
 
 // TODO [T3-02]: Save the current todos array to localStorage under
@@ -67,12 +68,16 @@ function validateTodo(input) {
   return valid;
 }
 
+function todoId() {
+  return Date().toString();
+}
+
 // TODO [T3-04]: Add a new task to state, save, and re-render.
 function addTodo(input) {
   todos.push({
     id: todoId(),
     input,
-    completed,
+    // completed,
     createdAt: Date().toString(),
   });
 }
@@ -114,6 +119,9 @@ function init() {
       addTodo(todoInput);
       els.input.value = "";
       // console.log("executed");
+
+      loadState();
+      saveState();
     }
   });
   renderTodos();
