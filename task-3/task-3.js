@@ -41,7 +41,9 @@ function loadState() {
 
 // TODO [T3-02]: Save the current todos array to localStorage under
 // STORAGE_KEY using JSON.stringify.
-function saveState() {}
+function saveState() {
+  localStorage.setItem("sky8.task3.todos", JSON.stringify(todos));
+}
 
 // TODO [T3-03]: Validate the submitted text. Reject empty strings and
 // whitespace-only strings.
@@ -59,7 +61,14 @@ function validateTodo(input) {
 }
 
 // TODO [T3-04]: Add a new task to state, save, and re-render.
-function addTodo(text) {}
+function addTodo(input) {
+  todos.push({
+    id: todoId(),
+    input,
+    completed,
+    createdAt: Date().toString(),
+  });
+}
 
 // TODO [T3-05]: Toggle the completed status of a task by id, save,
 // and re-render.
