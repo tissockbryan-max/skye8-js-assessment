@@ -29,7 +29,7 @@ Fork URL: https://github.com/tissockbryan-max/skye8-js-assessment
 Tick only what is complete and working on the hosted site.
 
 - [ ✔ ] Task 1 - Interactive Expense Calculator
-- [ ] Task 2 - Student Grade Manager
+- [ ✔ ] Task 2 - Student Grade Manager
 - [ ] Task 3 - Persistent To-Do Application
 - [ ] Task 4 - Product Search, Filter and Sort
 - [ ] Task 5 - Interactive Sales Dashboard
@@ -47,12 +47,12 @@ Tick only what is complete and working on the hosted site.
 
 ### Task 2
 
-- [ ] Students stored as objects with a derived grade
-- [ ] Grade banding implemented as a single function
-- [ ] Average, highest, lowest and count all derived
-- [ ] Average shown to one decimal place
-- [ ] Validation covers empty name and out-of-range scores
-- [ ] No `NaN` with zero students
+- [ ✔ ] Students stored as objects with a derived grade
+- [ ✔ ] Grade banding implemented as a single function
+- [ ✔ ] Average, highest, lowest and count all derived
+- [ ✔ ] Average shown to one decimal place
+- [ ✔ ] Validation covers empty name and out-of-range scores
+- [ ✔ ] No `NaN` with zero students
 
 ### Task 3
 
@@ -100,13 +100,13 @@ Tick only what is complete and working on the hosted site.
 <!-- What you actually did, not what you intended to do. Name the edge
      cases you tried and what happened. -->
 
-| Task | Normal case                                        | Invalid input                                               | Edge case                                                | Console                                  |
-| ---- | -------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------- |
-| 1    | Entered valid expense name an amount to see effect | Tried inputing a number in place of a string and vice-versa | Entered multiple values but the page didn't break at all | Errors occured while validating the form |
-| 2    |                                                    |                                                             |                                                          |                                          |
-| 3    |                                                    |                                                             |                                                          |                                          |
-| 4    |                                                    |                                                             |                                                          |                                          |
-| 5    |                                                    |                                                             |                                                          |                                          |
+| Task | Normal case                                               | Invalid input                                               | Edge case                                                | Console                                  |
+| ---- | --------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------- |
+| 1    | Entered valid expense name an amount to see effect        | Tried inputing a number in place of a string and vice-versa | Entered multiple values but the page didn't break at all | Errors occured while validating the form |
+| 2    | Inputed text as a description and the input was validated | Entered a number and made it display an error               | Entered a number and made it display an error            | Errors occured while validating the form |
+| 3    |                                                           |                                                             |                                                          |                                          |
+| 4    |                                                           |                                                             |                                                          |                                          |
+| 5    |                                                           |                                                             |                                                          |                                          |
 
 ## Challenges encountered
 
