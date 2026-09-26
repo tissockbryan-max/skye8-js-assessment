@@ -44,7 +44,6 @@ function loadState() {
       return [];
     }
   }
-  console.log(savedTodo);
 }
 
 // TODO [T3-02]: Save the current todos array to localStorage under
@@ -67,7 +66,7 @@ function validateTodo(input) {
   }
   return valid;
 }
-
+//  Fucntion to generate a unique id for each todo in the todos list.
 function todoId() {
   return crypto.randomUUID();
 }
@@ -77,7 +76,7 @@ function addTodo(input) {
   todos.push({
     id: todoId(),
     input,
-    // completed
+    completed: true,
     createdAt: Date().toString(),
   });
   renderStats();
@@ -105,11 +104,7 @@ function getFilteredTodos() {
   let all = todos.filter((todo) => todo);
   let completed = todos.filter((todo) => todo.completed === true);
   let pending = todos.filter((todo) => todo.completed !== false);
-  return {
-    filterAll: all,
-    filterCompleted: completed,
-    filterPending: pending,
-  };
+  return { all, completed, pending };
 }
 
 // TODO [T3-08]: Build the task list from the filtered state. Clear it
@@ -120,9 +115,13 @@ function renderTodos() {}
 // All counters must be derived from the array, never incremented.
 function renderStats() {
   let filter = getFilteredTodos();
-  els.filterAll.textContent = filter.filterAll;
-  els.filterCompleted.textContent = filter.filterCompleted;
-  els.filterPending.textContent = filter.filterPending;
+  els.statTotal.textContent = filter.all.length;
+  els.statCompleted.textContent = filter.completed.length;
+  els.statPending.textContent = filter.pending.length;
+
+  if (todos.length !== 0) {
+    els.empty.style.display = "none";
+  }
 }
 
 function init() {
@@ -134,13 +133,10 @@ function init() {
     const todoInput = els.input.value.trim();
     const todo = validateTodo(todoInput);
     if (!todo) {
-      // console.log("done!");
       return;
     } else {
       addTodo(todoInput);
       els.input.value = "";
-      // console.log("executed");
-
       loadState();
       saveState();
     }
