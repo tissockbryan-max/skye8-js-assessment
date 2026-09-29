@@ -57,11 +57,11 @@ Tick only what is complete and working on the hosted site.
 ### Task 3
 
 - [ ] Add, complete, revert and delete all work
-- [ ] Three filters work and show an active state
-- [ ] Counters derived, not incremented
+- [ ✔ ] Three filters work and show an active state
+- [ ✔ ] Counters derived, not incremented
 - [ ] Persists across a refresh under `skye8.task3.todos`
-- [ ] `JSON.parse` guarded by `try/catch`
-- [ ] Empty and whitespace-only tasks rejected
+- [ ✔ ] `JSON.parse` guarded by `try/catch`
+- [ ✔ ] Empty and whitespace-only tasks rejected
 
 ### Task 4
 

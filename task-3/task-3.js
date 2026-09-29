@@ -46,14 +46,12 @@ function loadState() {
   }
 }
 
-// TODO [T3-02]: Save the current todos array to localStorage under
-// STORAGE_KEY using JSON.stringify.
+// TODO [T3-02]
 function saveState() {
   return localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
 
-// TODO [T3-03]: Validate the submitted text. Reject empty strings and
-// whitespace-only strings.
+// TODO [T3-03]
 function validateTodo(input) {
   els.inputErrorMessage.textContent = "";
   let valid = true;
@@ -66,12 +64,12 @@ function validateTodo(input) {
   }
   return valid;
 }
-//  Fucntion to generate a unique id for each todo in the todos list.
+// Fucntion to generate a unique id for each todo in the todos list.
 function todoId() {
   return crypto.randomUUID();
 }
 
-// TODO [T3-04]: Add a new task to state, save, and re-render.
+// TODO [T3-04]
 function addTodo(input) {
   todos.push({
     id: todoId(),
@@ -103,16 +101,23 @@ function removeTodo(id) {
 function getFilteredTodos() {
   let all = todos.filter((todo) => todo);
   let completed = todos.filter((todo) => todo.completed === true);
-  let pending = todos.filter((todo) => todo.completed !== false);
+  let pending = todos.filter((todo) => todo.completed !== true);
   return { all, completed, pending };
 }
 
-// TODO [T3-08]: Build the task list from the filtered state. Clear it
-// first. No innerHTML concatenation of unescaped user input.
-function renderTodos() {}
+// TODO [T3-08]
+function renderTodos() {
+  els.list.innerHTML = "";
+  todos.forEach((todo) => {
+    let todoContainer = document.createElement("li");
+    let todoName = document.createElement("h3");
+    todoName.textContent = todo.input;
+    todoContainer.appendChild(todoName);
+    els.list.appendChild(todoContainer);
+  });
+}
 
-// TODO [T3-09]: Update the counters and toggle the empty state.
-// All counters must be derived from the array, never incremented.
+// TODO [T3-09]
 function renderStats() {
   let filter = getFilteredTodos();
   els.statTotal.textContent = filter.all.length;
@@ -125,9 +130,7 @@ function renderStats() {
 }
 
 function init() {
-  // TODO [T3-10]: Load state, bind the form submit, bind filter
-  // buttons, bind toggle and delete delegation, then perform the
-  // first render.
+  // TODO [T3-10]
   els.form.addEventListener("submit", (e) => {
     e.preventDefault();
     const todoInput = els.input.value.trim();
