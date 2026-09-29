@@ -74,7 +74,7 @@ function addTodo(input) {
   todos.push({
     id: todoId(),
     input,
-    completed: true,
+    completed: false,
     createdAt: Date().toString(),
   });
   renderStats();
@@ -84,6 +84,12 @@ function addTodo(input) {
 // TODO [T3-05]: Toggle the completed status of a task by id, save,
 // and re-render.
 function toggleTodo(id) {
+  todos.forEach((todo) => {
+    if (id === todo.id) {
+      todo.id = !todo.id;
+    }
+  });
+
   renderStats();
   renderTodos();
 }
@@ -91,6 +97,7 @@ function toggleTodo(id) {
 // TODO [T3-06]: Remove a task by id, save, and re-render.
 function removeTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   renderStats();
   renderTodos();
 }
@@ -110,9 +117,31 @@ function renderTodos() {
   els.list.innerHTML = "";
   todos.forEach((todo) => {
     let todoContainer = document.createElement("li");
+    let toggleCheckBox = document.createElement("input");
     let todoName = document.createElement("h3");
+    let removeBtn = document.createElement("button");
+
+    todoContainer.style.display = "flex";
+    todoContainer.style.flexDirection = "row";
+    todoContainer.style.marginBottom = "2rem";
+    todoContainer.style.justifyContent = "space-between";
+
+    toggleCheckBox.type = "checkbox";
+    toggleCheckBox.setAttribute("id", "checkbox-toggle");
+    toggleCheckBox.addEventListener("change", (e) => {
+      let checkBoxId = e.target.getAttribute("id");
+      toggleTodo(checkBoxId);
+      // localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    });
+
     todoName.textContent = todo.input;
+    removeBtn.textContent = "remove";
+    removeBtn.className = "remove-todo-btn";
+    removeBtn.dataset.id = todo.id;
+    todoContainer.appendChild(toggleCheckBox);
     todoContainer.appendChild(todoName);
+    todoContainer.appendChild(removeBtn);
+
     els.list.appendChild(todoContainer);
   });
 }
@@ -124,9 +153,8 @@ function renderStats() {
   els.statCompleted.textContent = filter.completed.length;
   els.statPending.textContent = filter.pending.length;
 
-  if (todos.length !== 0) {
-    els.empty.style.display = "none";
-  }
+  if (todos.length !== 0) els.empty.style.display = "none";
+  else els.empty.style.display = "flex";
 }
 
 function init() {
@@ -142,6 +170,13 @@ function init() {
       els.input.value = "";
       loadState();
       saveState();
+    }
+  });
+
+  els.list.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-todo-btn")) {
+      let removeList = e.target.dataset.id;
+      removeTodo(removeList);
     }
   });
   renderTodos();
