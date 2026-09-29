@@ -89,7 +89,7 @@ function toggleTodo(id) {
       todo.id = !todo.id;
     }
   });
-
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   renderStats();
   renderTodos();
 }
@@ -127,9 +127,9 @@ function renderTodos() {
     todoContainer.style.justifyContent = "space-between";
 
     toggleCheckBox.type = "checkbox";
-    toggleCheckBox.setAttribute("id", "checkbox-toggle");
+    toggleCheckBox.dataset.id = "checkbox-toggle";
     toggleCheckBox.addEventListener("change", (e) => {
-      let checkBoxId = e.target.getAttribute("id");
+      let checkBoxId = e.target.dataset.id;
       toggleTodo(checkBoxId);
       // localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     });
@@ -178,6 +178,17 @@ function init() {
       let removeList = e.target.dataset.id;
       removeTodo(removeList);
     }
+  });
+
+  let buttons = document.querySelectorAll(".toolbar");
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      currentFilter = e.target.getAttribute("data-filter");
+      buttons.forEach((btn) => btn.classList.remove("active"));
+      e.target.classList.add("active");
+
+      renderTodos();
+    });
   });
   renderTodos();
   renderStats();
